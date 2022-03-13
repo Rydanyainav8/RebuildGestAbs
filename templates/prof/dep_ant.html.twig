@@ -1,0 +1,54 @@
+{% include "navbarProf.html.twig" %}
+
+{% block title %}Depart Anticipé
+{% endblock %}
+
+{% block body %}
+
+	<div class="login">
+		<div class="lo cart">
+			<h1 class="fontDepAnt bck">Depart anticipé</h1>
+			{{ form_start(form) }}
+			<div class="centrage">
+				<div class="formcontainer2">
+					<div class="blok">
+						<p>
+							<label for="dep_ant_etudiant_motif">Motif du retard
+							</label>
+						</p>
+					</div>
+					<div class="blok">
+						{{ form_widget(form.motif) }}
+						<p>
+							<label for="dep_ant_etudiant_tempDep">Temps de depart
+							</label>
+						</p>
+						{{ form_widget(form.tempDep)}}
+					</div>
+					<div class="blok">
+						<p>
+							<label for="dep_ant_etudiant_tempArr">Temps d'arrivé
+							</label>
+						</p>
+						{{ form_widget(form.tempArr) }}
+					</div>
+				</div>
+			</div>
+			<div class="btnForm ">
+				<button type="submit" class="btn-formu">Envoyer</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+		{% for message in app.flashes('success') %}
+			<div class="ic">
+				<div class="success-msgico normal">
+					<i class="far fa-check-circle"></i>
+				</div>
+				<h3 class="success-msgtxt normal">
+					<p>{{ message }}</p>
+				</h3>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

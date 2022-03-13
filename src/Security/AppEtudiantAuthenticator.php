@@ -15,11 +15,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class AppAdminAuthenticator extends AbstractLoginFormAuthenticator
+class AppEtudiantAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login_admin';
+    public const LOGIN_ROUTE = 'app_login_etudiant';
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -50,8 +50,8 @@ class AppAdminAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_admin'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('absenceEtudiant'));
     }
 
     protected function getLoginUrl(Request $request): string

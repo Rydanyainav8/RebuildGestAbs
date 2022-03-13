@@ -270,7 +270,7 @@ tbody tr td a i.fa-chart-line
 }
 .add
 {
-  padding: 10px 10px;
+  padding: 0 10px;
   text-align: end;
   margin-right: 20px;
 }
@@ -523,7 +523,10 @@ textarea
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
+.containertable
+{
+  margin-top: 20px;
+}
 .sidebar ul li
 {
   border-top-left-radius: 10px;
@@ -593,7 +596,7 @@ a.deco
 .out
 {
   position: absolute;
-  top: 20px;
+  top: 27px;
   right: 25px;
 }
 .fa-sign-out-alt
@@ -677,11 +680,14 @@ a.deco
 }
 i.fal.fa-sign-out-alt
 {
-  position: absolute;
-  bottom: 10px;
-  left: 170px;
   color: #f1f1f1;
   transition: 0.4s;
+}
+.logout i.fal.fa-sign-out-alt
+{
+  position: absolute;
+  left: 170px;
+  bottom: 10px;
 }
 i.fa-sign-out-alt
 {
@@ -804,4 +810,77 @@ td img
   border-radius: 50%;
   vertical-align: middle;
   margin-left: 20px;
+}
+
+/* .searchContainer 
+{
+  display: inline-flex;
+  flex: 1 1 300px;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.searchIcon 
+{
+  padding: 0.5rem;
+}
+.searchButton 
+{
+  background: #bebaba;
+  border: 0;
+  color: white;
+  padding: 0.6rem;
+  border-radius: 0;
+  transition: all 0.3s;
+}
+.searchButton:hover
+{
+  background: #538AC5;
+  transition: all 0.3s;
+}
+.searchBox {
+  border: 0;
+  /* padding: 0.6rem 5rem 0.6rem 0; 
+  padding: 0.6rem 16rem 0.6rem 0;
+  flex: 1;
+  background: #f1f1f1;
+  border-radius: 3px;
+}*/
+.searchBox
+{
+  float: left;
+  padding: 9px;
+  width: 70%;
+  border: 1px solid #a1a1a1;
+}
+.searchButton
+{
+  float: left;
+  background: #bebaba;
+  border: 0;
+  color: white;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.searchButton:hover
+{
+  background: #538AC5;
+  transition: all 0.3s;
+}
+.searchIcon
+{
+  float: left;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: #fff;
+  background: orangered;
+}
+footer
+{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
 }

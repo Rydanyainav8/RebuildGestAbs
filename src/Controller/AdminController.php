@@ -27,13 +27,13 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/Admin', name: 'app_admin')]
     public function index(): Response
     {
         return $this->redirectToRoute('indexEtudiant');
     }
 
-    #[Route('/admin/create/etudiant', name: 'createEtudiant')]
+    #[Route('/Admin/create/etudiant', name: 'createEtudiant')]
     public function createEtudiant(Request $req, UserPasswordHasherInterface $hasher, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
 
@@ -71,7 +71,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/indexEt', name: 'indexEtudiant')]
+    #[Route('/Admin/indexEt', name: 'indexEtudiant')]
     public function indexEtudiant(EtudiantRepository $etudiantRepo, Request $req): Response
     {
 
@@ -95,7 +95,7 @@ class AdminController extends AbstractController
         return $this->render('admin/etudiant/index.html.twig', compact('etudiants', 'limit', 'page', 'total', 'form'));
     }
 
-    #[Route('admin/editEt/{id}', name:'editEtudiant')]
+    #[Route('/Admin/editEt/{id}', name:'editEtudiant')]
     public function editEtudiant(Etudiant $etudiant, Request $req, EntityManagerInterface $em, SluggerInterface $slugger)
     {
         $form = $this->createForm(EditEtudiantType::class, $etudiant);
@@ -127,7 +127,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/deleteEtudiant/{id}', name:'deleteEtudiant')]
+    #[Route('/Admin/deleteEtudiant/{id}', name:'deleteEtudiant')]
     public function deleteEt(Etudiant $etudiant, PersistenceManagerRegistry $doctrine)
     {
         $em = $doctrine->getManager();
@@ -138,7 +138,7 @@ class AdminController extends AbstractController
 
     ////////////////////////////////////CRUD PROF///////////////////////////////////////
 
-    #[Route('admin/createProf', name:'createProf')]
+    #[Route('/Admin/createProf', name:'createProf')]
     public function createProf(Request $req, UserPasswordHasherInterface $hasher, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $prof = new Prof();
@@ -175,7 +175,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/indexProf', name:'indexProf')]
+    #[Route('Admin/indexProf', name:'indexProf')]
     public function indexProf(ProfRepository $profRepo): Response
     {
         $profs = $profRepo->findAll();
@@ -214,7 +214,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('admin/deleteProf/{id}', name:'deleteProf')]
+    #[Route('Admin/deleteProf/{id}', name:'deleteProf')]
     public function deleteProf(Prof $prof, PersistenceManagerRegistry $doctrine)
     {
         $em = $doctrine->getManager();
@@ -244,7 +244,7 @@ class AdminController extends AbstractController
     }
 
     
-    #[Route('admin/indexModule', name: 'indexModule')]
+    #[Route('Admin/indexModule', name: 'indexModule')]
     public function indexModule(ModuleRepository $moduleRepo): Response
     {
         $modules = $moduleRepo->findAll();
@@ -270,14 +270,14 @@ class AdminController extends AbstractController
 
     /////////////////STATISTIQUE//////////////////////
 
-    #[Route('/admin/stat/', name: 'adminstat_index')]
+    #[Route('/Admin/stat/', name: 'adminstat_index')]
     public function statindex(EtudiantRepository $etudiantRepo): Response
     {
         $etudiants = $etudiantRepo->findAll();
         return $this->render('admin/statistique/index.html.twig', compact('etudiants'));
     }
 
-    #[Route('/admin/statEtudiant/{id}', name: 'admin_statEtudiant')]
+    #[Route('/Admin/statEtudiant/{id}', name: 'admin_statEtudiant')]
     public function statAbsEtudiant($id, Etudiant $etudiant, AbsEtudiantRepository $AbsEtudiantRepo, RetardEtudiantRepository $retEtRepo): Response
     {
         // $etudiantMonthStats = $AbsEtudiantRepo->getEtudiantByEmail($id);

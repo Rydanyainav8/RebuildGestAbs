@@ -19,6 +19,16 @@ security:
             entity:
                 class: App\Entity\Admin
                 property: email
+
+        app_etudiant_provider:
+            entity:
+                class: App\Entity\Etudiant
+                property: email 
+
+        app_prof_provider:
+            entity:
+                class: App\Entity\Prof
+                property: email        
         # used to reload user from session & other features (e.g. switch_user)
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
@@ -27,7 +37,7 @@ security:
             security: false
 
         admin: 
-            pattern: ^/admin|loginAdmin
+            pattern: ^/Admin|loginAdmin
             lazy: true
             provider: app_admin_provider
             custom_authenticator: App\Security\AppAdminAuthenticator
@@ -35,6 +45,23 @@ security:
                 path: app_logout
                 target: admin
 
+        etudiant:
+            pattern: ^/Etudiant|loginEtudiant
+            lazy: true
+            provider: app_etudiant_provider
+            custom_authenticator: App\Security\AppEtudiantAuthenticator
+            logout:
+                path: app_logout
+                target: index
+
+        prof:
+            pattern: ^/Prof|loginProf
+            lazy: true
+            provider: app_prof_provider
+            custom_authenticator: App\Security\AppProfAuthenticator
+            logout: 
+                path: app_logout
+                target: index
 
         main:
             lazy: true
@@ -52,7 +79,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/Admin, roles: ROLE_ADMIN }
+        - { path: ^/Etudiant, roles: ROLE_STUDENT }
+        - { path: ^/Prof, roles: ROLE_ENS }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
