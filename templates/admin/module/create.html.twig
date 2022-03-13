@@ -1,0 +1,48 @@
+{% include "sidebar.html.twig" %}
+<title>
+	{% block title %}Module
+	{% endblock %}
+</title>
+
+{% form_theme form "bootstrap_5_layout.html.twig" %}
+
+{% block body %}
+	<div class="containerSidebar">
+		<div class="login">
+			<div class="lo cart">
+				<div class="fontlog">Création de module</div>
+				<div class="centrage">
+					<div class="formcontainerEt">
+						{{ form_start(form)}}
+
+						{{ form_label(form.nom, 'Nom du module') }}
+						{{ form_errors(form.nom) }}
+						{{ form_widget(form.nom) }}
+
+						{{ form_label(form.category, 'Catégorie') }}
+						{{ form_errors(form.category) }}
+						{{ form_widget(form.category) }}
+
+						{{ form_label(form.prof) }}
+						{{ form_errors(form.prof) }}
+						{{ form_widget(form.prof) }}
+						<div class="btn">
+							<button class="btn-formu" type="submit">Valider</button>
+						</div>
+						{{ form_end(form)}}
+					</div>
+				</div>
+			</div>
+		{% for message in app.flashes('success') %}
+			<div class="ic">
+				<div class="success-msgico normal">
+					<i class="far fa-check-circle"></i>
+				</div>
+				<h3 class="success-msgtxt normal">
+					<p>{{ message }}</p>
+				</h3>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+{% endblock %}

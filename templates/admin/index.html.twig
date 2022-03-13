@@ -1,0 +1,8 @@
+{% include "sidebar.html.twig" %}
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+<a href="{{ path('indexEtudiant') }}">Etudiant</a>
+<a href="{{ path('indexProf') }}">Prof</a>
+<a href="{{ path('app_logout') }}">Deco</a>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% include "sidebar.html.twig" %}
+<title>
+	{% block title %}Prof
+	{% endblock %}
+</title>
+{% form_theme form "bootstrap_5_layout.html.twig" %}
+{% block body %}
+<div class="containerSidebar">
+	<div class="login">
+		<div class="lo cart">
+			<div class="fontlog">Création de prof</div>
+			<div class="centrage">
+				<div class="formcontainer2 w600">
+					<div class="flexForm">
+						<div class="text2">
+							<div class="imaz">
+								<img src="{{asset('uploads/pdp/' ~ Vimg)}}" alt="">
+							</div>
+							<div class="form-file width90">
+								<label for="edit_etudiant_pdp">
+									<i class="fas fa-camera fa-2x"></i>
+								</label>
+								{{ form_widget(form.pdp,{'attr':{'class':'form-control', 'multiple accept':'image/png, image/jpeg'}}) }}
+								<div class="form-file-path"></div>
+							</div>
+                        </div>
+                        <div class="text1">
+                            {{ form_start(form)}}
+                            {{ form_label(form.lastname, 'Nom d\'utilisateur')}}
+                            {{ form_errors(form.lastname)}}
+                            {{ form_widget(form.lastname) }}	
+
+                            {{ form_label(form.firstname, 'Prénom')}}
+                            {{ form_errors(form.firstname)}}
+                            {{ form_widget(form.firstname) }}  
+                            
+                            {{ form_label(form.email, 'Email')}}
+                            {{ form_errors(form.email)}}
+                            {{ form_widget(form.email) }}
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <button class="btn-formu" type="submit">Valider</button>
+                    </div>
+
+            {{ form_end(form)}}
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

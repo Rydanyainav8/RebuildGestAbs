@@ -1,0 +1,39 @@
+{% include "sidebar.html.twig" %}
+<title>
+	{% block title %}Module
+	{% endblock %}
+</title>
+{% block body %}
+	<div class="containerSidebar">
+		<div class="add">
+			<a href="{{ path('createModule') }}">
+				<i class="fal fa-books-medical"></i>
+			</a>
+		</div>
+		<div class="responsive-table cartborder">
+			<table class="table striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Catégorie</th>
+						<th>Prof</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for module in modules %}
+						<tr>
+							<td>{{ module.nom }}</td>
+							<td>{{ module.category }}</td>
+							<td>{{ module.prof}}</td>
+							<td>
+								<a href="{{ path('editModule', {id: module.id}) }}">
+                                    <i class="fal fa-sliders-h"></i>
+                                </a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+{% endblock %}

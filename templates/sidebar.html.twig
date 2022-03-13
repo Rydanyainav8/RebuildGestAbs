@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<header>
+		<div class="sidebar">
+			<header>
+				<a href="{{ path("index") }}">
+					ADMIN
+				</a>
+			</header>
+			<ul id="navigation">
+				<li>
+					<a href="{{ path('indexEtudiant') }}">
+						<i class="fal fa-graduation-cap"></i>
+						Etudiant
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('indexProf') }}">
+						<i class="fal fa-chalkboard-teacher"></i>
+						Prof
+					</a>
+				</li>
+				<li>
+					<a
+						href="{{ path('indexModule') }}">
+						{# <i class="far fa-users-class"></i> #}
+						<i class="fal fa-books"></i>
+						Module
+					</a>
+				</li>
+				<li>
+					<a href="{{ path('adminstat_index') }}">
+						{# <i class="fal fa-chart-line"></i> #}
+						<i class="far fa-user-chart"></i>
+						Statistique
+					</a>
+				</li>
+
+			</ul>
+			<div class="logout">
+				<a href="{{path("app_logout")}}" class="deco">
+					<i class="fal fa-sign-out-alt"></i>
+				</a>
+			</div>
+		</div>
+		{% block javascripts %}
+			<script src="/assets/js/sidebar.js"></script>
+		{% endblock %}
+	</header>
+{% endblock %}

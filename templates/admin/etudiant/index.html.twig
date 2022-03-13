@@ -1,0 +1,97 @@
+{% include "sidebar.html.twig" %}
+<title>
+	{% block title %}Etudiant
+	{% endblock %}
+</title>
+{% block body %}
+	<div class="containerSidebar">
+		<div class="navbara">
+			<div class="searchContainer">
+				{{ form_start(form)}}
+				<i class="fa fa-search searchIcon"></i>
+				{{ form_row(form.mots, {'attr':{'placeholder':'Rechercher...','class':'searchBox'}}) }}
+				<input type="submit" value="Chercher" class="searchButton">
+				{{ form_end(form)}}
+			</div>
+		</div>
+		<div class="add">
+			<a href="{{ path('createEtudiant') }}">
+				<i class="far fa-user-plus"></i>
+			</a>
+		</div>
+		<div class="responsive-table cartborder">
+			<table class="table striped">
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>email</th>
+						<th>Niveau</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for etudiant in etudiants %}
+						<tr>
+							<td>
+								<img src="{{asset('uploads/pdp/' ~ etudiant.photo)}}" alt="">
+							</td>
+							<td>{{etudiant.lastname}}</td>
+							<td>{{etudiant.firstname}}</td>
+							<td>{{etudiant.email}}</td>
+							<td>{{etudiant.grade}}</td>
+							<td>
+								<a href="{{ path('editEtudiant', {id: etudiant.id}) }}">
+									<i class="far fa-user-cog"></i>
+								</a>
+								<a href="#" class="modal-trigger" data-target="modal-delete" data-id="{{ etudiant.id }}" data-prenom="{{ etudiant.firstname }}">
+									<i class="far fa-user-minus"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="modal shadow-1 white falling" id="modal-delete" data-ax="modal">
+			<div class="modal-header">Supprimer un(e) person(ne)</div>
+			<div class="divider"></div>
+			<div class="modal-content"></div>
+			<div class="divider"></div>
+			<div class="modal-footer">
+				<div class="end">
+					<a href="" class="btn-red">Valider</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		{% set queryParams = app.request.query.all %}
+		{% set queryString = queryParams | filter((v, k) => k != "page" and k != "ajax") | url_encode %}
+	 
+		<ul class="pagination">
+			<li class="{{ (page == 1) ? "disabled": '' }}">
+				<a href="{{ (page > 1) ? '?page=' ~ (page - 1) : '' }}&{{ queryString }}">
+					<i class="fas fa-angle-left"></i>
+				</a>
+			</li>
+			{% set pages = (total / limit)|round(0, 'ceil') %}
+			{% set var = page < pages %}
+			{% for item in 1..pages %}
+				<li class="{{ (page == item) ? 'active': '' }}">
+					<a href="?page={{ item }}&{{ queryString }}">{{ item }}</a>
+				</li>
+			{% endfor %}
+			<li class="{{ (page == pages) ? 'disabled': '' }}">
+				<a href="{{ (var) ? '?page=' ~ (page + 1) : '' }}&{{ queryString }}">
+					<i class="fas fa-angle-right"></i>
+				</a>
+			</li>
+		</ul>
+	</footer>
+	{% block javascripts %}
+		<script src="/assets/js/delete.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axentix@1.3.3/dist/js/axentix.min.js"></script>
+	{% endblock %}
+{% endblock %}

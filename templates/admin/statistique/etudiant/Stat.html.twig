@@ -1,0 +1,67 @@
+{% include "sidebar.html.twig" %}
+<title>
+	{% block title %}Statistique
+	{% endblock %}
+</title>
+
+{% block body %}
+	<div class="containerSidebar">
+		<h1 class="muted">Statistique de
+			<span>{{ username }}</span><img src="{{ asset('uploads/pdp/' ~ photo )}}" alt=""></h1>
+		<div class="content">
+			<h2 class="muted">Absence</h2>
+			<div class="tsipika"></div>
+			<div class="flexStat">
+				<div class="stat1">
+					<h3 class="inli">Par semaine</h3>
+					<div class="chartCard">
+						<div class="chartBox cart">
+							<canvas id="myChartAbs2" width="400" height="200"></canvas>
+						</div>
+						<div class="stat">
+							{% include "admin/statistique/etudiant/statAbsEtudiantW.html.twig" %}
+						</div>
+					</div>
+				</div>
+				<div class="stat2">
+					<h3 class="inli">Par mois</h3>
+					<div class="chartCard">
+						<div class="chartBox cart">
+							<canvas id="myChartAbs" width="400" height="200"></canvas>
+						</div>
+						<div class="stat">
+							{% include "admin/statistique/etudiant/statAbsEtudiantM.html.twig" %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="muted">Retard</h2>
+			<div class="tsipika"></div>
+
+			<div class="flexStat">
+				<div class="stat1">
+					<h3 class="inli">Par semaine</h3>
+					<div class="chartCard">
+						<div class="chartBox cart">
+							<canvas id="myChartRet2" width="400" height="200"></canvas>
+						</div>
+						<div class="stat">
+							{% include "admin/statistique/etudiant/statRetEtudiantW.html.twig" %}
+						</div>
+					</div>
+				</div>
+				<div class="stat2">
+					<h3 class="inli">Par mois</h3>
+					<div class="chartCard">
+						<div class="chartBox cart">
+							<canvas id="myChartRet" width="400" height="200"></canvas>
+						</div>
+						<div class="stat">
+							{% include "admin/statistique/etudiant/statRetEtudiantM.html.twig" %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

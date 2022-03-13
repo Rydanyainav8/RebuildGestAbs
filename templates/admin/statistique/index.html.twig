@@ -1,0 +1,35 @@
+{% include "sidebar.html.twig" %}
+{% block title %}Statistique{% endblock %}
+{% block body %}
+	<div class="containerSidebar">
+		<div class="responsive-table cartborder">
+			<table class="table striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>email</th>
+						<th>Niveau</th>
+						<th>Statistique</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for etudiant in etudiants %}
+						<tr>
+							<td>{{etudiant.lastname}}</td>
+							<td>{{etudiant.firstname}}</td>
+							<td>{{etudiant.email}}</td>
+							<td>{{etudiant.grade}}</td>
+							<td>
+								<a href="{{ path('admin_statEtudiant', {id: etudiant.id}) }}">
+						            {# <i class="fal fa-chart-line"></i> #}
+									<i class="fas fa-chart-bar"></i>
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
