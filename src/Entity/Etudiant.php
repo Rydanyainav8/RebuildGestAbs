@@ -53,6 +53,11 @@ class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
         $this->depAntEtudiants = new ArrayCollection();
         $this->absEtudiants = new ArrayCollection();
     }
+    
+    public function __toString()
+    {
+        return $this->email;   
+    }
 
     public function getId(): ?int
     {

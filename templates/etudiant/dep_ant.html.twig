@@ -16,9 +16,15 @@
 							<label for="dep_ant_etudiant_motif">Motif du retard
 							</label>
 						</p>
+						{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
 					</div>
 					<div class="blok">
-						{{ form_widget(form.motif) }}
+						<p>
+							<label for="dep_ant_etudiant_email1">Email des parents</label>
+						</p>
+						{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
+					</div>
+					<div class="blok">
 						<p>
 							<label for="dep_ant_etudiant_tempDep">Temps de depart
 							</label>

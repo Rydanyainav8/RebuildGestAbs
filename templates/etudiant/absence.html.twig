@@ -14,8 +14,20 @@
 						<p>
 							<label for="absence_et_motif">Motif de l'absence</label>
 						</p>
-						{{form_widget(form.motif)}}
+						{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
+					</div>		
+					<div class="blok">
+						<p>
+							<label for="absence_et_email1">Email des parents</label>
+						</p>
+						{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
 					</div>
+					{# <div class="blok">
+						<p>
+							<label for="absence_et_email2">Email de la scolarité</label>
+						</p>
+						{{form_widget(form.email2, {'attr': {'class':'form-control'}})}}
+					</div> #}
 					<label for="absence_et_imgJustif">Pièce Justificatif</label>
 					<div class="form-file">
 						<label for="absence_et_imgJustif">

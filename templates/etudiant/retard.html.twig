@@ -16,9 +16,13 @@
 							<label for="retard_etudiant_motif">Motif du retard
 							</label>
 						</p>
+						{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
 					</div>
 					<div class="blok">
-						{{ form_widget(form.motif) }}
+						<p>
+							<label for="absence_et_email1">Email des parents</label>
+						</p>
+						{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
 					</div>
 					<div class="GrandFlex">
 						<div class="flexy1">

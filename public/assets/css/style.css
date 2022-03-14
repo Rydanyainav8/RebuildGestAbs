@@ -665,7 +665,7 @@ a.deco
   position: absolute;
   bottom: 2rem;
   display: inline-block;
-  border: 1px solid #4BB543;
+  /* border: 1px solid #4BB543; */
   border-radius: 5px;
   padding: 5px 7px;
 }
