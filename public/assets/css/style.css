@@ -427,7 +427,7 @@ textarea
 }
 .max-width
 {
-    max-width: 1300px;
+    max-width: 1800px;
     padding: 0 80px;
     margin: auto;
 }
@@ -641,7 +641,19 @@ a.deco
 .flexy2
 {
   flex: 1;
+  /* text-align: center; */
+}
+.center
+{
   text-align: center;
+}
+.mg
+{
+  margin-left: 30px;
+}
+.timeA
+{
+  text-align: left;
 }
 .fa-clock
 {

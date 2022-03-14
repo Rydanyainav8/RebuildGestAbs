@@ -63,14 +63,15 @@ class EtudiantController extends AbstractController
             $scolarite = 'respon@scolarite.com';
             $toAdresses = [$parent, new Address($scolarite)];
             $motifEmail = $form['motif']->getData();
-
+            $title = 'Absence';
             $email = (new TemplatedEmail())
                 ->from('admin@rydan.com')
                 ->to(...$toAdresses)
-                ->subject('Absence')
+                ->subject($title)
                 // ->text( ' est absent')
                 ->htmlTemplate('email/model.html.twig')
                 ->context([
+                    'Title' => $title,
                     'UserEmail' => $user,
                     'Motif' => $motifEmail
                 ]);
@@ -105,14 +106,16 @@ class EtudiantController extends AbstractController
             $scolarite = 'respon@scolarite.com';
             $toAdresses = [$parent, new Address($scolarite)];
             $motifEmail = $form['motif']->getData();
+            $title = 'Depart anticipé';
 
             $email = (new TemplatedEmail())
                 ->from('admin@rydan.com')
                 ->to(...$toAdresses)
-                ->subject('Absence')
+                ->subject($title)
                 // ->text( ' est absent')
                 ->htmlTemplate('email/model.html.twig')
                 ->context([
+                    'Title' => $title,
                     'UserEmail' => $user,
                     'Motif' => $motifEmail
                 ]);
@@ -150,14 +153,15 @@ class EtudiantController extends AbstractController
             $scolarite = 'respon@scolarite.com';
             $toAdresses = [$parent, new Address($scolarite)];
             $motifEmail = $form['motif']->getData();
-
+            $title = 'Retard';
             $email = (new TemplatedEmail())
                 ->from('admin@rydan.com')
                 ->to(...$toAdresses)
-                ->subject('Absence')
+                ->subject($title)
                 // ->text( ' est absent')
                 ->htmlTemplate('email/model.html.twig')
                 ->context([
+                    'Title' => $title,
                     'UserEmail' => $user,
                     'Motif' => $motifEmail
                 ]);

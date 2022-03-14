@@ -11,26 +11,38 @@
 			{{ form_start(form) }}
 			<div class="centrage">
 				<div class="formcontainer2">
-					<div class="blok">
-						<p>
-							<label for="dep_ant_etudiant_motif">Motif du retard
-							</label>
-						</p>
-					</div>
-					<div class="blok">
-						{{ form_widget(form.motif) }}
-						<p>
-							<label for="dep_ant_etudiant_tempDep">Temps de depart
-							</label>
-						</p>
-						{{ form_widget(form.tempDep)}}
-					</div>
-					<div class="blok">
-						<p>
-							<label for="dep_ant_etudiant_tempArr">Temps d'arrivé
-							</label>
-						</p>
-						{{ form_widget(form.tempArr) }}
+					<div class="GrandFlex">
+						<div class="flexy1">
+							<div class="blok">
+								<p>
+									<label for="dep_ant_prof_motif">Motif du retard
+									</label>
+								</p>
+								{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
+							</div>
+							<div class="blok">
+								<p>
+									<label for="dep_ant_prof_email1">Email scolarité</label>
+								</p>
+								{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
+							</div>
+						</div>
+						<div class="flexy2 mg left">
+							<div class="blok">
+								<p>
+									<label for="dep_ant_prof_tempDep">Temps de depart
+									</label>
+								</p>
+								{{ form_widget(form.tempDep, {'attr': {'class':'form-control'}})}}
+							</div>
+							<div class="blok">
+								<p>
+									<label for="dep_ant_prof_tempArr">Temps d'arrivé
+									</label>
+								</p>
+								{{ form_widget(form.tempArr, {'attr': {'class':'form-control'}}) }}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -2,8 +2,18 @@
 {% block body %}
 	<nav class="navbar">
 		<div class="max-width">
+			{# <div class="wh">
+				<div class="circle">
+					<div class="face">
+						<div id="hour" class="hour"></div>
+						<div id="minute" class="minute"></div>
+						<div id="second" class="second"></div>
+					</div>
+				</div>
+			</div> #}
 			<div class="logo">
-				<a href="{{ path('index')}}">Gestion d'<span>absence</span></a>
+				<a href="{{ path('index')}}">Gestion d'<span>absence</span>
+				</a>
 			</div>
 			<ul class="menu" id="navigation">
 				<li>
@@ -24,6 +34,7 @@
 		</div>
 	</nav>
 	{% block javascripts %}
-			<script src="/assets/js/sidebar.js"></script>
+		<script src="/assets/js/sidebar.js"></script>
+		{# // <script src="/assets/js/clock.js"></script> #}
 	{% endblock %}
 {% endblock %}

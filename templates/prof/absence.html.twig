@@ -12,9 +12,15 @@
 				<div class="formcontainer2">
 					<div class="blok">
 						<p>
-							<label for="absence_et_motif">Motif de l'absence</label>
+							<label for="absence_prof_motif">Motif de l'absence</label>
 						</p>
-						{{form_widget(form.motif)}}
+						{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
+					</div>
+					<div class="blok">
+						<p>
+							<label for="absence_prof_email1">Email scolarité</label>
+						</p>
+						{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
 					</div>
 					<div class="btnForm">
 						<button class="btn-formu" type="submit">Envoyer</button>

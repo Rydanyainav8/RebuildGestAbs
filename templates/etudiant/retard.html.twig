@@ -11,33 +11,39 @@
 			{{ form_start(form) }}
 			<div class="centrage">
 				<div class="formcontainer2">
-					<div class="blok">
-						<p>
-							<label for="retard_etudiant_motif">Motif du retard
-							</label>
-						</p>
-						{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
-					</div>
-					<div class="blok">
-						<p>
-							<label for="absence_et_email1">Email des parents</label>
-						</p>
-						{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
-					</div>
 					<div class="GrandFlex">
 						<div class="flexy1">
-							<div class="timeA">
-								<label for="retard_etudiant_tempCours">Temps du cours</label>
-								{{ form_widget(form.tempCours)}}
+							<div class="blok">
+								<p>
+									<label for="retard_etudiant_motif">Motif du retard
+									</label>
+								</p>
+								{{form_widget(form.motif, {'attr': {'class':'form-control'}})}}
 							</div>
-							<div class="timeA">
-								<label for="retard_etudiant_tempArr">Temps d'arrivé</label>
-								{{ form_widget(form.tempArr) }}
+							<div class="blok">
+								<p>
+									<label for="absence_et_email1">Email des parents</label>
+								</p>
+								{{form_widget(form.email1, {'attr': {'class':'form-control'}})}}
 							</div>
 						</div>
-						<div class="flexy2">
-							<div class="clock">
-								<i class="far fa-clock"></i>
+						<div class="flexy2 mg left">
+							<div class="GrandFlex">
+								<div class="flexy1 center">
+									<div class="timeA">
+										<label for="retard_etudiant_tempCours">Temps du cours</label>
+										{{ form_widget(form.tempCours, {'attr': {'class':'form-control'}})}}
+									</div>
+									<div class="timeA">
+										<label for="retard_etudiant_tempArr">Temps d'arrivé</label>
+										{{ form_widget(form.tempArr, {'attr': {'class':'form-control'}}) }}
+									</div>
+								</div>
+								{# <div class="flexy2 center">
+									<div class="clock">
+										<i class="far fa-clock"></i>
+									</div>
+								</div> #}
 							</div>
 						</div>
 					</div>
