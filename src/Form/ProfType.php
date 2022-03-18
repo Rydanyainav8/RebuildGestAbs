@@ -28,9 +28,12 @@ class ProfType extends AbstractType
             ->add('modules', EntityType::class,[
                 'class' => Module::class,
                 'choice_label' => 'nom',
-                'multiple' => true,
-                'expanded' => false,
+                'multiple' => false,
+                'expanded' => true,
                 'label_attr' => array('class' => 'radio-inline'),
+                'mapped' => false,
+                'required' => false,
+                'placeholder' => 'Plus tard...'
             ])
         ;
     }

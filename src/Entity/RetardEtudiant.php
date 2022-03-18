@@ -31,7 +31,7 @@ class RetardEtudiant
     public function __construct()
     {
         $this->createdAt =  new \DateTime('now');    
-        $this->tempDep =  new \DateTime('now');    
+        $this->tempArr =  new \DateTime('now');    
         $this->tempCours =  new \DateTime('now');    
     }
 

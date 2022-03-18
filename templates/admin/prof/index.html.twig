@@ -1,51 +1,52 @@
-
 {% include "sidebar.html.twig" %}
 <title>
 	{% block title %}Prof
 	{% endblock %}
 </title>
 {% block body %}
-{# {{dump()}} #}
+	{# {{dump()}} #}
 	<div class="containerSidebar">
 		<div class="add">
 			<a href="{{ path('createProf') }}">
 				<i class="far fa-user-plus"></i>
 			</a>
 		</div>
-		<div class="responsive-table cartborder">
-			<table class="table striped">
-				<thead>
-					<tr>
-						<th>Photo</th>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>email</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-				
-					{% for prof in profs %}
+		<div class="containertable">
+			<div class="responsive-table cartborder">
+				<table class="table striped">
+					<thead>
 						<tr>
-							<td>
-								<img src="{{asset('uploads/pdp/' ~ prof.photo)}}" alt="">
-							</td>
-							<td>{{prof.lastname}}</td>
-							<td>{{prof.firstname}}</td>
-							<td>{{prof.email}}</td>
-							{# <td>{{prof.modules}}</td> #}
-							<td>
-								<a href="{{ path('editProf', {id: prof.id}) }}">
-									<i class="far fa-user-cog"></i>
-								</a>
-								<a href="#" class="modal-trigger" data-target="modal-delete" data-id="{{ prof.id }}" data-prenom="{{ prof.firstname }}">
-									<i class="far fa-user-minus"></i>
-								</a>
-							</td>
+							<th>Photo</th>
+							<th>Nom</th>
+							<th>Prénom</th>
+							<th>email</th>
+							<th>Action</th>
 						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+
+						{% for prof in profs %}
+							<tr>
+								<td>
+									<img src="{{asset('uploads/pdp/' ~ prof.photo)}}" alt="">
+								</td>
+								<td>{{prof.lastname}}</td>
+								<td>{{prof.firstname}}</td>
+								<td>{{prof.email}}</td>
+								{# <td>{{prof.modules}}</td> #}
+								<td>
+									<a href="{{ path('editProf', {id: prof.id}) }}">
+										<i class="far fa-user-cog"></i>
+									</a>
+									<a href="#" class="modal-trigger" data-target="modal-delete" data-id="{{ prof.id }}" data-prenom="{{ prof.firstname }}">
+										<i class="far fa-user-minus"></i>
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="modal shadow-1 white falling" id="modal-delete" data-ax="modal">
 			<div class="modal-header">Supprimer un(e) person(ne)</div>
