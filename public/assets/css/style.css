@@ -832,7 +832,8 @@ td img
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
-}
+} */
+/*
 .searchIcon 
 {
   padding: 0.5rem;
@@ -850,15 +851,15 @@ td img
 {
   background: #538AC5;
   transition: all 0.3s;
-}
-.searchBox {
+}*/
+/* .searchBox {
   border: 0;
-  /* padding: 0.6rem 5rem 0.6rem 0; 
+  padding: 0.6rem 5rem 0.6rem 0; 
   padding: 0.6rem 16rem 0.6rem 0;
   flex: 1;
   background: #f1f1f1;
   border-radius: 3px;
-}*/
+} */
 .searchBox
 {
   float: left;
