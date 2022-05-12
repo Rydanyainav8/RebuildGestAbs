@@ -876,10 +876,12 @@ td img
   padding: 10px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  transition: all 0.3s;
+
 }
 .searchButton:hover
 {
-  background: #538AC5;
+  background: orangered;
   transition: all 0.3s;
 }
 .searchIcon
@@ -896,4 +898,25 @@ footer
   position: absolute;
   bottom: 0;
   left: 50%;
+}
+.errorMsg
+{
+  display: block;
+  font-weight: bolder;
+  margin-top: 20px;
+}
+
+.errorContainer
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  /* color: #ff000094; */
+  color: #5a5a5a94;
+}
+.fa-sad-tear
+{
+  font-size: 10vw;
 }

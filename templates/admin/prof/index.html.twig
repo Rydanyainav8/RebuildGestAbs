@@ -6,11 +6,31 @@
 {% block body %}
 	{# {{dump()}} #}
 	<div class="containerSidebar">
+
+		<div class="searchContainer">
+			{{ form_start(form) }}
+			<i class="fa fa-search searchIcon"></i>
+			{{ form_row(form.mots, {'attr':{'placeholder':'Rechercher Prof...', 'class':'searchBox'}}) }}
+			<input type="submit" value="Chercher" class="searchButton">
+			{{ form_end(form) }}
+		</div>
+
 		<div class="add">
 			<a href="{{ path('createProf') }}">
 				<i class="far fa-user-plus"></i>
 			</a>
 		</div>
+
+		{% if app.flashes('error') %}
+			<div class="containertable">
+				<div class="errorContainer">
+					<div class="tears">
+						<i class="fal fa-sad-tear"></i>
+					</div>
+					<div class="errorMsg">{{ message }}</div>
+				</div>
+			</div>
+		{% else %}
 		<div class="containertable">
 			<div class="responsive-table cartborder">
 				<table class="table striped">
@@ -48,6 +68,7 @@
 				</table>
 			</div>
 		</div>
+		{% endif %}
 		<div class="modal shadow-1 white falling" id="modal-delete" data-ax="modal">
 			<div class="modal-header">Supprimer un(e) person(ne)</div>
 			<div class="divider"></div>

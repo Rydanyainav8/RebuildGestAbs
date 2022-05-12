@@ -68,7 +68,7 @@ class EtudiantRepository extends ServiceEntityRepository implements PasswordUpgr
         
         if ($mots != null) 
         {
-            $query->andWhere('e.email LIKE :mots')
+            $query->andWhere('e.email LIKE :mots OR e.lastname LIKE :mots')
                 ->setParameter('mots', "%{$mots}%");
         }
         return $query->getQuery()->getResult();

@@ -62,6 +62,22 @@ class ProfRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /** 
+     * @return Prof[]
+     * 
+    */
+    public function SearchProf($mots)
+    {
+        $query = $this->createQueryBuilder('p');
+
+        if ($mots != null) 
+        {
+            $query->andWhere('p.email LIKE :mots OR p.lastname LIKE :mots')
+                ->setParameter('mots', "%{$mots}%");
+        }
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Prof[] Returns an array of Prof objects
     //  */

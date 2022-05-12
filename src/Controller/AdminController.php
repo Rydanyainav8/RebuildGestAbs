@@ -2,28 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Etudiant;
-use App\Entity\Module;
 use App\Entity\Prof;
-use App\Form\EditEtudiantType;
+use App\Entity\Module;
+use App\Form\ProfType;
+use App\Entity\Etudiant;
+use App\Form\ModuleType;
 use App\Form\EditProfType;
 use App\Form\EtudiantType;
-use App\Form\ModuleType;
-use App\Form\ProfType;
+use App\Form\SearchProfType;
+use App\Form\EditEtudiantType;
 use App\Form\SearchEtudiantType;
-use App\Repository\AbsEtudiantRepository;
-use App\Repository\EtudiantRepository;
-use App\Repository\ModuleRepository;
 use App\Repository\ProfRepository;
-use App\Repository\RetardEtudiantRepository;
+use App\Repository\ModuleRepository;
+use App\Repository\EtudiantRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AbsEtudiantRepository;
+use App\Repository\RetardEtudiantRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
 {
@@ -81,18 +82,20 @@ class AdminController extends AbstractController
         $total = $etudiantRepo->getTotalEtudiant();
         $form = $this->createForm(SearchEtudiantType::class);
         $search = $form->handleRequest($req);
+        $message = 'Etudiant non trouvé';
 
         if ($form->isSubmitted() && $form->isValid()) {
             $etudiants = $etudiantRepo->SearchEtudiant($search->get('mots')->getData());
             if ($etudiants == null) {
-                $this->addFlash('message', 'Etudiant not found');
+                $this->addFlash('error', '???');
+                $message;
             }
         }
         $form = $form->createView();
 
         // $etudiants = $etudiantRepo->findAll();
 
-        return $this->render('admin/etudiant/index.html.twig', compact('etudiants', 'limit', 'page', 'total', 'form'));
+        return $this->render('admin/etudiant/index.html.twig', compact('etudiants', 'limit', 'page', 'total', 'form', 'message'));
     }
 
     #[Route('/Admin/editEt/{id}', name:'editEtudiant')]
@@ -176,10 +179,24 @@ class AdminController extends AbstractController
     }
 
     #[Route('Admin/indexProf', name:'indexProf')]
-    public function indexProf(ProfRepository $profRepo): Response
+    public function indexProf(ProfRepository $profRepo, Request $req): Response
     {
         $profs = $profRepo->findAll();
-        return $this->render('admin/prof/index.html.twig', compact('profs'));
+        $form = $this->createForm(SearchProfType::class);
+        $search = $form->handleRequest($req);
+        $message = 'Prof non trouvé';
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $profs = $profRepo->SearchProf($search->get('mots')->getData());
+            if ($profs == null) 
+            {
+                $this->addFlash('error', '...');
+                $message;
+            }
+        }
+        $form = $form->createView();
+        return $this->render('admin/prof/index.html.twig', compact('profs', 'form', 'message'));
     }
 
     #[Route('admin/editProf/{id}', name:'editProf')]
