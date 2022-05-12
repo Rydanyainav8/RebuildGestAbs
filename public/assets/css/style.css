@@ -796,7 +796,10 @@ h3.inli
 .invalid-feedback
 {
   color: red;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
+
 td img
 {
   width: 50px;
@@ -916,7 +919,28 @@ footer
   /* color: #ff000094; */
   color: #5a5a5a94;
 }
+.errorContainer2
+{
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
 .fa-sad-tear
 {
   font-size: 10vw;
+}
+.editBtn
+{
+  display: inline-block;
+  margin-inline: 50px;
+}
+.blue
+{
+  border: 1px solid rgb(0, 174, 255);
+  color: #10c8ff;
+  background: none;
+}
+.blue:hover{
+  color: #f1f1f1;
+  background-color: #10c8ff;
 }

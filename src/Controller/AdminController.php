@@ -24,6 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Exception;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
@@ -234,9 +235,20 @@ class AdminController extends AbstractController
     #[Route('Admin/deleteProf/{id}', name:'deleteProf')]
     public function deleteProf(Prof $prof, PersistenceManagerRegistry $doctrine)
     {
-        $em = $doctrine->getManager();
-        $em->remove($prof);
-        $em->flush();
+        try{
+            $em = $doctrine->getManager();
+            $em->remove($prof);
+            $em->flush();
+        }
+        catch(\Exception $e)
+        {
+            error_log($e->getMessage());
+            if ($e) 
+            {
+                // return new Response("Erreur");
+                $this->addFlash('not_delete', 'Vous ne pouvez pas supprimer une prof appartenant à un module, supprimer le prof dans le module et réesayer');
+            }
+        }
         return $this->redirectToRoute('indexProf');
     }
 
@@ -268,12 +280,12 @@ class AdminController extends AbstractController
         return $this->render('admin/module/index.html.twig', compact('modules'));
     }
 
-    #[Route('admin/edtiModule/{id}', name:'editModule')]
+    #[Route('admin/editModule/{id}', name:'editModule')]
     public function editModule(Module $module, Request $req, EntityManagerInterface $em)
     {
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($req);
-
+        $id = $module->getId();
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $em->persist($module);
@@ -282,7 +294,17 @@ class AdminController extends AbstractController
         }
         return $this->render('admin/module/edit.html.twig',[
             'form' => $form->createView(),
+            'id' => $id
         ]);
+    }
+
+    #[Route('Admin/deleteModule/{id}', name: 'deleteModule')]
+    public function deleteModule(Module $module, PersistenceManagerRegistry $doctrine)
+    {
+        $em = $doctrine->getManager();
+        $em->remove($module);
+        $em->flush();
+        return $this->redirectToRoute('indexModule');
     }
 
     /////////////////STATISTIQUE//////////////////////

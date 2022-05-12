@@ -26,23 +26,49 @@
 						{{ form_label(form.prof) }}
 						{{ form_errors(form.prof) }}
 						{{ form_widget(form.prof, {'attr':{'class':'form-control'}}) }}
-						<div class="btn">
-							<button class="btn-formu" type="submit">Valider</button>
-						</div>
+						<center>
+							<div class="editBtn">
+								<div class="btn">
+									<a href="#" class="modal-trigger btn-formu" data-target="modal-delete" data-id="{{ id }}">
+										Suprimer
+									</a>
+								</div>
+							</div>
+							<div class="editBtn">
+								<div class="btn">
+									<button class="btn-formu blue" type="submit">Valider</button>
+								</div>
+							</div>
+						</center>
 						{{ form_end(form)}}
 					</div>
 				</div>
 			</div>
-		{% for message in app.flashes('success') %}
-			<div class="ic">
-				<div class="success-msgico normal">
-					<i class="far fa-check-circle"></i>
+			{% for message in app.flashes('success') %}
+				<div class="ic">
+					<div class="success-msgico normal">
+						<i class="far fa-check-circle"></i>
+					</div>
+					<h3 class="success-msgtxt normal">
+						<p>{{ message }}</p>
+					</h3>
 				</div>
-				<h3 class="success-msgtxt normal">
-					<p>{{ message }}</p>
-				</h3>
+			{% endfor %}
+		</div>
+		<div class="modal shadow-1 white falling" id="modal-delete" data-ax="modal">
+			<div class="modal-header">Supprimer le module</div>
+			<div class="divider"></div>
+			<div class="modal-content"></div>
+			<div class="divider"></div>
+			<div class="modal-footer">
+				<div class="end">
+					<a href="" class="btn-red">Suprimer</a>
+				</div>
 			</div>
-		{% endfor %}
 		</div>
 	</div>
+	{% block javascripts %}
+		<script src="/assets/js/deleteMod.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axentix@1.3.3/dist/js/axentix.min.js"></script>
+	{% endblock %}
 {% endblock %}
