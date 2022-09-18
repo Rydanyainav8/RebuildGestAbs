@@ -142,7 +142,7 @@ class Prof implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setLastname(string $lastname): self
     {
-        $this->lastname = $lastname;
+        $this->lastname = strtoupper($lastname);
 
         return $this;
     }

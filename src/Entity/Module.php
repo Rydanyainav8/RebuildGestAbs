@@ -39,7 +39,7 @@ class Module
 
     public function setNom(string $nom): self
     {
-        $this->nom = $nom;
+        $this->nom = strtoupper($nom);
 
         return $this;
     }

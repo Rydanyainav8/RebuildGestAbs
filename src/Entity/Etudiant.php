@@ -141,7 +141,8 @@ class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setLastname(string $lastname): self
     {
-        $this->lastname = $lastname;
+        $up = strtoupper($lastname);
+        $this->lastname = $up;
 
         return $this;
     }
@@ -154,7 +155,6 @@ class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 
