@@ -77,7 +77,7 @@ class AdminController extends AbstractController
     public function indexEtudiant(EtudiantRepository $etudiantRepo, Request $req): Response
     {
 
-        $limit = 40;
+        $limit = 15;
         $page = (int)$req->query->get('page', 1);
         $etudiants = $etudiantRepo->getPaginatedEtudiant($page, $limit);
         $total = $etudiantRepo->getTotalEtudiant();
@@ -99,21 +99,19 @@ class AdminController extends AbstractController
         return $this->render('admin/etudiant/index.html.twig', compact('etudiants', 'limit', 'page', 'total', 'form', 'message'));
     }
 
-    #[Route('/Admin/editEt/{id}', name:'editEtudiant')]
+    #[Route('/Admin/editEt/{id}', name: 'editEtudiant')]
     public function editEtudiant(Etudiant $etudiant, Request $req, EntityManagerInterface $em, SluggerInterface $slugger)
     {
         $form = $this->createForm(EditEtudiantType::class, $etudiant);
         $form->handleRequest($req);
         $Vimg = $etudiant->getPhoto();
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $pdp = $form['pdp']->getData();
-            if ($pdp) 
-            {
+            if ($pdp) {
                 $originalFileName = pathinfo($pdp->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFileName = $slugger->slug($originalFileName);
                 $newFileName = $safeFileName . '-' . uniqid() . '-' . $pdp->guessExtension();
-                
+
                 $pdp->move(
                     $this->getParameter('pdp_directory'),
                     $newFileName
@@ -125,24 +123,24 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('indexEtudiant');
         }
 
-        return $this->render('admin/etudiant/edit.html.twig',[
+        return $this->render('admin/etudiant/edit.html.twig', [
             'form' => $form->createView(),
             'Vimg' => $Vimg
         ]);
     }
 
-    #[Route('/Admin/deleteEtudiant/{id}', name:'deleteEtudiant')]
+    #[Route('/Admin/deleteEtudiant/{id}', name: 'deleteEtudiant')]
     public function deleteEt(Etudiant $etudiant, PersistenceManagerRegistry $doctrine)
     {
         $em = $doctrine->getManager();
         $em->remove($etudiant);
         $em->flush();
         return $this->redirectToRoute('indexEtudiant');
-    }   
+    }
 
     ////////////////////////////////////CRUD PROF///////////////////////////////////////
 
-    #[Route('/Admin/createProf', name:'createProf')]
+    #[Route('/Admin/createProf', name: 'createProf')]
     public function createProf(Request $req, UserPasswordHasherInterface $hasher, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $prof = new Prof();
@@ -150,15 +148,13 @@ class AdminController extends AbstractController
 
         $form->handleRequest($req);
 
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $pdp = $form['pdp']->getData();
-            if ($pdp) 
-            {
+            if ($pdp) {
                 $originalFileName = pathinfo($pdp->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFileName = $slugger->slug($originalFileName);
                 $newFileName = $safeFileName . '-' . uniqid() . '-' . $pdp->guessExtension();
-                
+
                 $pdp->move(
                     $this->getParameter('pdp_directory'),
                     $newFileName
@@ -174,12 +170,12 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('indexProf');
         }
 
-        return $this->render('admin/prof/create.html.twig',[
+        return $this->render('admin/prof/create.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
-    #[Route('Admin/indexProf', name:'indexProf')]
+    #[Route('Admin/indexProf', name: 'indexProf')]
     public function indexProf(ProfRepository $profRepo, Request $req): Response
     {
         $profs = $profRepo->findAll();
@@ -187,11 +183,9 @@ class AdminController extends AbstractController
         $search = $form->handleRequest($req);
         $message = 'Prof non trouvé';
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $profs = $profRepo->SearchProf($search->get('mots')->getData());
-            if ($profs == null) 
-            {
+            if ($profs == null) {
                 $this->addFlash('error', '...');
                 $message;
             }
@@ -200,21 +194,19 @@ class AdminController extends AbstractController
         return $this->render('admin/prof/index.html.twig', compact('profs', 'form', 'message'));
     }
 
-    #[Route('admin/editProf/{id}', name:'editProf')]
+    #[Route('admin/editProf/{id}', name: 'editProf')]
     public function editProf(Prof $prof, Request $req, EntityManagerInterface $em, SluggerInterface $slugger)
     {
         $form = $this->createForm(EditProfType::class, $prof);
         $form->handleRequest($req);
         $Vimg = $prof->getPhoto();
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $pdp = $form['pdp']->getData();
-            if ($pdp) 
-            {
+            if ($pdp) {
                 $originalFileName = pathinfo($pdp->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFileName = $slugger->slug($originalFileName);
                 $newFileName = $safeFileName . '-' . uniqid() . '-' . $pdp->guessExtension();
-                
+
                 $pdp->move(
                     $this->getParameter('pdp_directory'),
                     $newFileName
@@ -226,25 +218,22 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('indexProf');
         }
 
-        return $this->render('admin/prof/edit.html.twig',[
+        return $this->render('admin/prof/edit.html.twig', [
             'form' => $form->createView(),
             'Vimg' => $Vimg
         ]);
     }
 
-    #[Route('Admin/deleteProf/{id}', name:'deleteProf')]
+    #[Route('Admin/deleteProf/{id}', name: 'deleteProf')]
     public function deleteProf(Prof $prof, PersistenceManagerRegistry $doctrine)
     {
-        try{
+        try {
             $em = $doctrine->getManager();
             $em->remove($prof);
             $em->flush();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             error_log($e->getMessage());
-            if ($e) 
-            {
+            if ($e) {
                 // return new Response("Erreur");
                 $this->addFlash('not_delete', 'Vous ne pouvez pas supprimer une prof appartenant à un module, supprimer le prof dans le module et réesayer');
             }
@@ -254,15 +243,14 @@ class AdminController extends AbstractController
 
     ////////////////////////CRUD MODULE//////////////////////////
 
-    #[Route('admin/createModule', name:'createModule')]
+    #[Route('admin/createModule', name: 'createModule')]
     public function createModule(Request $req, EntityManagerInterface $em): Response
     {
         $module = new Module();
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($req);
 
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'Module ajoutée');
             $em->persist($module);
             $em->flush();
@@ -272,7 +260,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('Admin/indexModule', name: 'indexModule')]
     public function indexModule(ModuleRepository $moduleRepo): Response
     {
@@ -280,19 +268,18 @@ class AdminController extends AbstractController
         return $this->render('admin/module/index.html.twig', compact('modules'));
     }
 
-    #[Route('admin/editModule/{id}', name:'editModule')]
+    #[Route('admin/editModule/{id}', name: 'editModule')]
     public function editModule(Module $module, Request $req, EntityManagerInterface $em)
     {
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($req);
         $id = $module->getId();
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($module);
             $em->flush();
             return $this->redirectToRoute('indexModule');
         }
-        return $this->render('admin/module/edit.html.twig',[
+        return $this->render('admin/module/edit.html.twig', [
             'form' => $form->createView(),
             'id' => $id
         ]);
@@ -323,7 +310,7 @@ class AdminController extends AbstractController
         // $NbAbsBy12Months = $AbsEtudiantRepo->CurrentMonthCountAbs($id);
         // $NbAbsByYear = $AbsEtudiantRepo->YearCountAbs($id);
 
-                /////////12 Months///////
+        /////////12 Months///////
         $JanAbs = $AbsEtudiantRepo->JanAbs($id);
         $FebAbs = $AbsEtudiantRepo->FebAbs($id);
         $MarAbs = $AbsEtudiantRepo->MarAbs($id);
@@ -337,7 +324,7 @@ class AdminController extends AbstractController
         $NovAbs = $AbsEtudiantRepo->NovAbs($id);
         $DecAbs = $AbsEtudiantRepo->DecAbs($id);
 
-                /////////7 Weeks///////
+        /////////7 Weeks///////
         $MonAbs = $AbsEtudiantRepo->MonAbs($id);
         $TueAbs = $AbsEtudiantRepo->TueAbs($id);
         $WedAbs = $AbsEtudiantRepo->WedAbs($id);
@@ -345,9 +332,9 @@ class AdminController extends AbstractController
         $FriAbs = $AbsEtudiantRepo->FriAbs($id);
         $SatAbs = $AbsEtudiantRepo->SatAbs($id);
 
-                ///////////RETARD////////
-        
-                          /////////12 Months///////
+        ///////////RETARD////////
+
+        /////////12 Months///////
         $JanRet = $retEtRepo->JanRet($id);
         $FevRet = $retEtRepo->FevRet($id);
         $MarRet = $retEtRepo->MarRet($id);
@@ -361,7 +348,7 @@ class AdminController extends AbstractController
         $NovRet = $retEtRepo->NovRet($id);
         $DecRet = $retEtRepo->DecRet($id);
 
-                /////////7 Weeks///////
+        /////////7 Weeks///////
         $MonRet = $retEtRepo->MonRet($id);
         $TueRet = $retEtRepo->TueRet($id);
         $WedRet = $retEtRepo->WedRet($id);
@@ -372,7 +359,7 @@ class AdminController extends AbstractController
         // $username = $etudiantRepo->getusername($id);
         $username = $etudiant->getEmail();
         $photo = $etudiant->getPhoto();
-    
+
         return $this->render('admin/statistique/etudiant/Stat.html.twig', [
             'JanAbs' => json_encode($JanAbs),
             'FebAbs' => json_encode($FebAbs),

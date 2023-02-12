@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: EtudiantRepository::class)]
 #[UniqueEntity(fields: "email", message: "Email déja utilisée")]
 class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
@@ -58,10 +60,10 @@ class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
         $this->depAntEtudiants = new ArrayCollection();
         $this->absEtudiants = new ArrayCollection();
     }
-    
+
     public function __toString()
     {
-        return $this->email;   
+        return $this->email;
     }
 
     public function getId(): ?int
@@ -120,6 +122,7 @@ class Etudiant implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): self
     {
+
         $this->password = $password;
 
         return $this;

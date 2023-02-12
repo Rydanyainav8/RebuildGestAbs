@@ -898,9 +898,9 @@ td img
 }
 footer
 {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
+  display: flex;
+  width: 99vw;
+  justify-content: center;
 }
 .errorMsg
 {
